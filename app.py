@@ -19,21 +19,21 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route("/mars", methods=["POST"])
-def mars_post():
-    name_receive = request.form['name_give']
-    address_receive = request.form['address_give']
-    size_receive = request.form['size_give']
+@app.route("/kavling", methods=["POST"])
+def kavling_post():
+    nama_receive = request.form['nama_give']
+    alamat_receive = request.form['alamat_give']
+    harga_receive = request.form['harga_give']
     doc = {
-        'name': name_receive,
-        'address': address_receive,
-        'size': size_receive
+        'nama': nama_receive,
+        'alamat': alamat_receive,
+        'harga': harga_receive
     }
     db.orders.insert_one(doc)
-    return jsonify({'msg': 'complete!'})
+    return jsonify({'msg': 'berhasil membeli!'})
 
-@app.route("/mars", methods=["GET"])
-def mars_get():
+@app.route("/kavling", methods=["GET"])
+def kavling_get():
     orders_list = list(db.orders.find({},{'_id':False}))
     return jsonify({'orders':orders_list})
 

@@ -13,7 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 
-    <title>Mars Land Purchase Site</title>
+    <title>Beli Kavling Muria Jaya</title>
 
     <style>
         * {
@@ -22,7 +22,7 @@
         }
         
         body {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.aitimes.com/news/photo/202010/132592_129694_3139.jpg');
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://strgonelabsprod.blob.core.windows.net/cms/post/tanah-kavling-adalah-1627372172503754068.jpeg');
             background-position: center;
             background-size: cover;
         }
@@ -59,19 +59,19 @@
         $('#order-box').empty()
         $.ajax({
             type: 'GET',
-            url: '/mars',
+            url: '/kavling',
             data: {},
             success: function (response) {
                 let rows = response['orders']
                 for (let i = 0; i < rows.length; i++) {
-                    let name = rows[i]['name']
-                    let address = rows[i]['address']
-                    let size = rows[i]['size']
+                    let nama = rows[i]['nama']
+                    let alamat = rows[i]['alamat']
+                    let harga = rows[i]['harga']
 
                     let temp_html = `<tr>
-                                        <td>${name}</td>
-                                        <td>${address}</td>
-                                        <td>${size}</td>
+                                        <td>${nama}</td>
+                                        <td>${alamat}</td>
+                                        <td>${harga}</td>
                                     </tr>`
                     $('#orders-box').append(temp_html)
                 }
@@ -82,16 +82,16 @@
 
 
         function save_order() {
-        let name = $('#name').val()
-        let address = $('#address').val()
-        let size = $('#size').val()
+        let nama = $('#nama').val()
+        let alamat = $('#alamat').val()
+        let harga = $('#harga').val()
 
         $.ajax({
             type: 'POST',
-            url: '/mars',
-            data: { name_give:name, 
-                    address_give:address, 
-                    size_give:size },
+            url: '/kavling',
+            data: { nama_give:nama, 
+                    alamat_give:alamat, 
+                    harga_give:harga },
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
@@ -105,39 +105,39 @@
 <body>
     <div class="mask"></div>
     <div class="order">
-        <h1>Buy Martian Land!</h1>
-        <h3>Price: $1.00 / acre</h3>
+        <h1>Beli Kavling Muria Jaya</h1>
+        <h3>Price: Rp 100.000.000.00</h3>
         <p>
-            Did you know you could buy Martian land?<br /> This chance won't come again!
+            Kamu ragu beli tanah kavling dimana?<br /> Beli di kavling muria jaya!
         </p>
         <div class="order-info">
             <div class="input-group mb-3">
-                <span class="input-group-text">Name</span>
+                <span class="input-group-text">Nama</span>
                 <input id="name" type="text" class="form-control">
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Address</span>
+                <span class="input-group-text">Alamat</span>
                 <input id="address" type="text" class="form-control">
             </div>
             <div class="input-group mb-3">
-                <label class="input-group-text" for="size">Acres</label>
+                <label class="input-group-text" for="size">Harga</label>
                 <select class="form-select" id="size">
-                    <option selected>-- Select acreage --</option>
-                    <option value="10">10 acres</option>
-                    <option value="20">20 acres</option>
-                    <option value="30">30 acres</option>
-                    <option value="40">40 acres</option>
-                    <option value="50">50 acres</option>
+                    <option selected>-- Pilih Harga --</option>
+                    <option value="10">100.000.000.00</option>
+                    <option value="20">200.000.000.00</option>
+                    <option value="30">300.000.000.00</option>
+                    <option value="40">400.000.000.00</option>
+                    <option value="50">500.000.000.00</option>
                 </select>
             </div>
-            <button onclick="save_order()" type="button" class="btn btn-warning mybtn">Create order</button>
+            <button onclick="save_order()" type="button" class="btn btn-warning mybtn">Buat order</button>
         </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Acres</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">Harga</th>
                 </tr>
             </thead>
             <tbody id="orders-box">
